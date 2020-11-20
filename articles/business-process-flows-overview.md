@@ -90,22 +90,9 @@ Business process flows provide a guide for people to get work done. They provide
   
 <a name="BKMK_Considerations"></a>   
 ## Business process flow considerations  
- You can define business process flows only for those entities that support them. You also need to be aware of the limits for the number of processes, stages, and steps that can be added.  
-  
-### Business process flows that call a workflow  
- You can call on-demand workflows from inside a business process flow. You can configure this from the new business process flow designer by dragging a workflow component to a process stage or to the Global Workflows section. For more information about using workflows in business process flows, see [Blog: Business process flow automation in Dynamics 365](https://blogs.msdn.microsoft.com/crm/2017/03/28/business-process-flow-automation-in-dynamics-365/).  
+ You can define business process flows only for those entities that support them. You also need to be aware of the limits for the number of processes, stages, and steps that can be added. 
  
- If you set a workflow to trigger on **Stage Exit** of a stage in your business process flow, the workflow is triggered whenever you leave that stage. This happens when you move to the *next* stage or to the *previous* stage. 
-  
- When you include a workflow that you want to trigger on Stage Exit of a stage in your business process flow, and that stage is  the last stage in the flow, the designer gives the impression that the workflow will be triggered when that stage is completed. However, the workflow will not be triggered because a stage transition does not take place. You will not receive a warning or error preventing you from including the workflow on the stage. When a user interacts with the business process flow, finishing or abandoning the process does not result in a stage transition, and therefore the workflow is not triggered. Consider the following examples:  
-  
--   You create a business process flow with two stages, S1 connects to  S2, with a workflow on stage S2 and set the trigger to **Stage Exit**.  
-  
--   You create a business process flow with three stages, S1 connect to S2, then S2 branches to S3. You include a workflow on S2 and set the trigger to **Stage Exit**.  
-  
- The workflow will not trigger in either case. To work around this issue, you can add a Global Workflow and add the workflow you want to trigger to it so that the workflow is triggered for the business process rather than a stage of the process. You can set the trigger for a Global workflow to Process Abandoned or Process Completed to cause the workflow to trigger when a user abandons or completes the business process.  
-  
-<a name="BKMK_Entities"></a>   
+ <a name="BKMK_Entities"></a>   
 ### Entities that can use business process flows  
  All custom entities can use business process flows. The following standard entities can also use business process flows:  
   
@@ -152,6 +139,19 @@ Business process flows provide a guide for people to get work done. They provide
   
 -   Multi-entity processes can contain no more than five entities.
   
+### Business process flows that call a workflow  
+ You can call on-demand workflows from inside a business process flow. You can configure this from the new business process flow designer by dragging a workflow component to a process stage or to the Global Workflows section. For more information about using workflows in business process flows, see [Blog: Business process flow automation in Dynamics 365](https://blogs.msdn.microsoft.com/crm/2017/03/28/business-process-flow-automation-in-dynamics-365/).  
+ 
+ If you set a workflow to trigger on **Stage Exit** of a stage in your business process flow, the workflow is triggered whenever you leave that stage. This happens when you move to the *next* stage or to the *previous* stage. 
+  
+ When you include a workflow that you want to trigger on Stage Exit of a stage in your business process flow, and that stage is  the last stage in the flow, the designer gives the impression that the workflow will be triggered when that stage is completed. However, the workflow will not be triggered because a stage transition does not take place. You will not receive a warning or error preventing you from including the workflow on the stage. When a user interacts with the business process flow, finishing or abandoning the process does not result in a stage transition, and therefore the workflow is not triggered. Consider the following examples:  
+  
+-   You create a business process flow with two stages, S1 connects to  S2, with a workflow on stage S2 and set the trigger to **Stage Exit**.  
+  
+-   You create a business process flow with three stages, S1 connect to S2, then S2 branches to S3. You include a workflow on S2 and set the trigger to **Stage Exit**.  
+  
+ The workflow will not trigger in either case. To work around this issue, you can add a Global Workflow and add the workflow you want to trigger to it so that the workflow is triggered for the business process rather than a stage of the process. You can set the trigger for a Global workflow to Process Abandoned or Process Completed to cause the workflow to trigger when a user abandons or completes the business process.  
+  
 ## Business process flow entity customization support 
 
 Introduced in the Dynamics 365 (online), version 9.0 update, business process flow entities can appear in the system so that entity record data can be made available in grids, views, charts, and dashboards. 
@@ -186,6 +186,15 @@ Specifically, the three commands that are available for a business process flow 
 - Next stage
 - Previous stage
 - Set Active stage
+
+### Lookup field in a business process flow stage
+
+Recent records are visible in a lookup field in Unified Interface. In order to disable the most recently used items from showing up in the lookup, follow these steps:
+1. Open [Power Apps maker portal](https://make.powerapps.com/home) and select the correct environment on the top right. 
+2. Navigate to **Tables** under **Data**. Search for your business process flow entity.
+3. Click on **Forms** and select the **Information** editor.
+4. Select your lookup data step from the **Tree view** and check **Disable most recently used items**.
+5. Save and publish. 
 
 ### Limitations of using business process flow entities
 
